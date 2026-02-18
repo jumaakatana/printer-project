@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Centralized Printer System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2e86de;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        main {
+            padding: 40px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        main h2 {
+            color: #2e86de;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2e86de;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b4f72;
+        }
+
+        .status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Library Centralized Printer System</h1>
+</header>
+
+<main>
+    <h2>Submit Document to Printer</h2>
+    <p>Use this form to submit your document directly to the library printer without using a USB drive.</p>
+
+    <form id="printForm">
+        <label for="username">Your Name:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="file">Choose Document:</label>
+        <input type="file" id="file" name="file" accept=".pdf,.doc,.docx,.txt" required>
+
+        <button type="submit">Send to Printer</button>
+    </form>
+
+    <div id="status" class="status"></div>
+</main>
+
+<script>
+    const form = document.getElementById('printForm');
+    const statusDiv = document.getElementById('status');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Simulate printing
+        const username = document.getElementById('username').value;
+        const file = document.getElementById('file').files[0];
+
+        if (file) {
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status success';
+            statusDiv.textContent = `Document "${file.name}" submitted successfully by ${username}!`;
+        } else {
+            statusDiv.style.display = 'block';
+            statusDiv.className = 'status error';
+            statusDiv.textContent = 'Error: No file selected.';
+        }
+
+        // Reset form
+        form.reset();
+    });
+</script>
+
+</body>
+</html>
