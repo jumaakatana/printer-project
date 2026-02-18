@@ -1,33 +1,60 @@
+/* ===== General Styles ===== */
 body {
-  font-family: Arial;
-  background: #0f172a;
-  color: white;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
   text-align: center;
-  padding-top: 50px;
+  margin: 0;
+  padding: 0;
 }
 
-.container {
-  background: #1e293b;
-  padding: 30px;
-  width: 300px;
-  margin: auto;
-  border-radius: 10px;
+/* ===== Headings ===== */
+h1 {
+  margin-top: 50px;
+  color: #007bff;
 }
 
-input {
+/* ===== Input Fields ===== */
+input[type="email"],
+input[type="password"] {
   display: block;
+  width: 250px;
   margin: 10px auto;
   padding: 10px;
-  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
 }
 
+/* ===== Buttons ===== */
 button {
+  display: block;
+  width: 150px;
+  margin: 20px auto;
   padding: 10px;
-  margin: 5px;
-  width: 85%;
-  background: #3b82f6;
-  border: none;
+  background-color: #007bff;
   color: white;
-  cursor: pointer;
+  border: none;
   border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* ===== Links ===== */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Paragraphs ===== */
+p {
+  margin-top: 20px;
 }
