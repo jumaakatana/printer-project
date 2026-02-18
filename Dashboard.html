@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Printer Login</title>
+  <title>Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-  <h2>School Printer System</h2>
+<h2>Printer Dashboard</h2>
 
-  <input type="email" id="email" placeholder="Enter Email">
-  <input type="password" id="password" placeholder="Enter Password">
+<input type="text" id="fileName" placeholder="Document Name">
+<input type="number" id="pages" placeholder="Number of Pages">
 
-  <button id="loginBtn">Login</button>
-  <button id="registerBtn">Register</button>
-</div>
+<button id="submitJob">Submit Print Job</button>
+<button id="logoutBtn">Logout</button>
 
-<script type="module" src="auth.js"></script>
+<h3>All Print Jobs</h3>
+<ul id="jobList"></ul>
+
+<script type="module" src="dashboard.js"></script>
 </body>
 </html>
+
