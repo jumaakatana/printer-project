@@ -3,53 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Library Printer System</title>
+<title>Library Printer System Dashboard</title>
 <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
-    body, html {height: 100%; width: 100%;}
-    button {cursor: pointer;}
-    .hidden {display: none;}
-    
-    /* Welcome Page */
-    #welcome {
-        background: url('https://images.unsplash.com/photo-1581091012184-46a5a22012eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGlicmFyeXx8fHx8fDE2ODY0NzM3Mzg&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        text-align: center;
-    }
-    #welcome h1 {font-size: 3rem; text-shadow: 2px 2px 8px rgba(0,0,0,0.6);}
-    #welcome p {font-size: 1.5rem; margin: 20px 0; text-shadow: 1px 1px 6px rgba(0,0,0,0.6);}
-    #welcome button {padding: 15px 30px; font-size: 1.2rem; border:none; border-radius: 5px; background-color: #2e86de; color:white;}
-    
-    /* Login Page & Dashboard common styles */
-    main {
-        max-width: 600px;
-        margin: 60px auto;
-        background: white;
-        padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-    }
-    h2 {color: #2e86de; margin-bottom: 20px;}
-    label {margin: 10px 0 5px; font-weight: bold; display:block;}
-    input[type="text"], input[type="password"], input[type="file"] {width: 100%; padding:10px; border:1px solid #ccc; border-radius:5px;}
-    button {margin-top:20px; padding:12px; border:none; border-radius:5px; background-color:#2e86de; color:white; font-size:1rem;}
-    button:hover {background-color:#1b4f72;}
-    .status {margin-top: 20px; padding:10px; border-radius:5px; display:none;}
-    .success {background-color:#d4edda; color:#155724;}
-    .error {background-color:#f8d7da; color:#721c24;}
-    #logoutBtn {background-color:#e74c3c;}
+* {margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif;}
+body, html {height:100%; width:100%; background-color:#f0f4f7;}
+.hidden {display:none;}
+button {cursor:pointer;}
+
+/* Welcome Page */
+#welcome {
+    background: url('https://images.unsplash.com/photo-1581091012184-46a5a22012eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8bGlicmFyeXx8fHx8fDE2ODY0NzM3Mzg&ixlib=rb-4.0.3&q=80&w=1080') no-repeat center center/cover;
+    height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; color:white; text-align:center;
+}
+#welcome h1 {font-size:3rem; text-shadow:2px 2px 8px rgba(0,0,0,0.6);}
+#welcome p {font-size:1.5rem; margin:20px 0; text-shadow:1px 1px 6px rgba(0,0,0,0.6);}
+#welcome button {padding:15px 30px; font-size:1.2rem; border:none; border-radius:5px; background-color:#2e86de; color:white;}
+
+/* Login Page */
+#loginPage {max-width:400px; margin:60px auto; background:white; padding:30px; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,0.15);}
+#loginPage h2 {color:#2e86de; margin-bottom:20px;}
+label {margin:10px 0 5px; font-weight:bold; display:block;}
+input[type="text"], input[type="password"] {width:100%; padding:10px; border:1px solid #ccc; border-radius:5px;}
+button {margin-top:20px; padding:12px; border:none; border-radius:5px; background-color:#2e86de; color:white; font-size:1rem;}
+button:hover {background-color:#1b4f72;}
+.status {margin-top: 20px; padding:10px; border-radius:5px; display:none;}
+.success {background-color:#d4edda; color:#155724;}
+.error {background-color:#f8d7da; color:#721c24;}
+
+/* Dashboard */
+#dashboard {
+    display:flex; height:100vh;
+}
+#sidebar {
+    width:220px; background-color:#2e86de; color:white; display:flex; flex-direction:column; padding-top:20px;
+}
+#sidebar h2 {text-align:center; margin-bottom:30px;}
+#sidebar button {
+    background:none; color:white; border:none; padding:15px 20px; text-align:left; width:100%; font-size:1rem; border-bottom:1px solid rgba(255,255,255,0.2);
+}
+#sidebar button:hover {background-color:#1b4f72;}
+#sidebar #logoutBtn {margin-top:auto; background-color:#e74c3c; border-radius:0;}
+#mainContent {
+    flex:1; padding:30px; background-color:#f9f9f9; overflow-y:auto;
+}
+#mainContent h2 {color:#2e86de; margin-bottom:20px;}
+form {display:flex; flex-direction:column;}
+input[type="file"] {margin-bottom:15px; padding:10px; border-radius:5px; border:1px solid #ccc;}
 </style>
 </head>
 <body>
 
 <!-- Welcome Page -->
 <section id="welcome">
-    <h1>Welcome to Library Centralized Printer System</h1>
+    <h1>Welcome to Library Printer System</h1>
     <p>Submit your documents quickly and efficiently, without using USB drives.</p>
     <button id="proceedLogin">Proceed to Login</button>
 </section>
@@ -68,86 +74,140 @@
 </main>
 
 <!-- Dashboard Page -->
-<main id="dashboard" class="hidden">
-    <h2>Welcome, <span id="userWelcome"></span>!</h2>
-    <p>Use the form below to submit your document to the printer:</p>
-    <form id="printForm">
-        <label for="file">Choose Document:</label>
-        <input type="file" id="file" accept=".pdf,.doc,.docx,.txt" required>
-        <button type="submit">Send to Printer</button>
-    </form>
-    <div id="printStatus" class="status"></div>
-    <button id="logoutBtn">Logout</button>
-</main>
+<div id="dashboard" class="hidden">
+    <div id="sidebar">
+        <h2>Library System</h2>
+        <button id="navDashboard">Dashboard</button>
+        <button id="navSubmit">Submit Document</button>
+        <button id="navQueue">Print Queue</button>
+        <button id="logoutBtn">Logout</button>
+    </div>
+    <div id="mainContent">
+        <!-- Default content -->
+        <div id="contentDashboard">
+            <h2>Welcome, <span id="userWelcome"></span>!</h2>
+            <p>This is your dashboard. Use the sidebar to navigate through system options.</p>
+        </div>
+        <div id="contentSubmit" class="hidden">
+            <h2>Submit Document</h2>
+            <form id="printForm">
+                <input type="file" id="file" accept=".pdf,.doc,.docx,.txt" required>
+                <button type="submit">Send to Printer</button>
+            </form>
+            <div id="printStatus" class="status"></div>
+        </div>
+        <div id="contentQueue" class="hidden">
+            <h2>Print Queue</h2>
+            <ul id="queueList"></ul>
+        </div>
+    </div>
+</div>
 
 <script>
-    // Show login from welcome
-    const proceedLoginBtn = document.getElementById('proceedLogin');
-    const welcome = document.getElementById('welcome');
-    const loginPage = document.getElementById('loginPage');
-    const dashboard = document.getElementById('dashboard');
-    const userWelcome = document.getElementById('userWelcome');
-    const logoutBtn = document.getElementById('logoutBtn');
+const proceedLoginBtn = document.getElementById('proceedLogin');
+const welcome = document.getElementById('welcome');
+const loginPage = document.getElementById('loginPage');
+const dashboard = document.getElementById('dashboard');
+const userWelcome = document.getElementById('userWelcome');
+const logoutBtn = document.getElementById('logoutBtn');
 
-    proceedLoginBtn.addEventListener('click', () => {
-        welcome.classList.add('hidden');
-        loginPage.classList.remove('hidden');
-    });
+// Show login from welcome
+proceedLoginBtn.addEventListener('click', ()=>{
+    welcome.classList.add('hidden');
+    loginPage.classList.remove('hidden');
+});
 
-    // Simulated users
-    const users = [
-        { username: "student1", password: "1234" },
-        { username: "teacher1", password: "abcd" }
-    ];
+// Simulated users
+const users = [{username:"student1", password:"1234"}, {username:"teacher1", password:"abcd"}];
+const loginForm = document.getElementById('loginForm');
+const loginStatus = document.getElementById('loginStatus');
 
-    const loginForm = document.getElementById('loginForm');
-    const loginStatus = document.getElementById('loginStatus');
+loginForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const user = users.find(u=>u.username===username && u.password===password);
+    if(user){
+        loginPage.classList.add('hidden');
+        dashboard.classList.remove('hidden');
+        userWelcome.textContent = username;
+        loginStatus.style.display = 'none';
+    } else{
+        loginStatus.style.display='block';
+        loginStatus.className='status error';
+        loginStatus.textContent='Invalid username or password.';
+    }
+});
 
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const user = users.find(u => u.username === username && u.password === password);
+// Sidebar navigation
+const navDashboard = document.getElementById('navDashboard');
+const navSubmit = document.getElementById('navSubmit');
+const navQueue = document.getElementById('navQueue');
+const contentDashboard = document.getElementById('contentDashboard');
+const contentSubmit = document.getElementById('contentSubmit');
+const contentQueue = document.getElementById('contentQueue');
 
-        if(user){
-            loginPage.classList.add('hidden');
-            dashboard.classList.remove('hidden');
-            userWelcome.textContent = username;
-            loginStatus.style.display = 'none';
-        } else {
-            loginStatus.style.display = 'block';
-            loginStatus.className = 'status error';
-            loginStatus.textContent = 'Invalid username or password.';
-        }
-    });
+navDashboard.addEventListener('click', ()=>{
+    contentDashboard.classList.remove('hidden');
+    contentSubmit.classList.add('hidden');
+    contentQueue.classList.add('hidden');
+});
+navSubmit.addEventListener('click', ()=>{
+    contentDashboard.classList.add('hidden');
+    contentSubmit.classList.remove('hidden');
+    contentQueue.classList.add('hidden');
+});
+navQueue.addEventListener('click', ()=>{
+    contentDashboard.classList.add('hidden');
+    contentSubmit.classList.add('hidden');
+    contentQueue.classList.remove('hidden');
+});
 
-    // Print form
-    const printForm = document.getElementById('printForm');
-    const printStatus = document.getElementById('printStatus');
+// Print form simulation and queue
+const printForm = document.getElementById('printForm');
+const printStatus = document.getElementById('printStatus');
+const queueList = document.getElementById('queueList');
+let printQueue = [];
 
-    printForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const file = document.getElementById('file').files[0];
-        if(file){
-            printStatus.style.display = 'block';
-            printStatus.className = 'status success';
-            printStatus.textContent = `Document "${file.name}" submitted successfully!`;
-            printForm.reset();
-        } else {
-            printStatus.style.display = 'block';
-            printStatus.className = 'status error';
-            printStatus.textContent = 'Please select a file.';
-        }
-    });
-
-    // Logout
-    logoutBtn.addEventListener('click', () => {
-        dashboard.classList.add('hidden');
-        loginPage.classList.remove('hidden');
-        loginForm.reset();
+printForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const file = document.getElementById('file').files[0];
+    if(file){
+        printStatus.style.display='block';
+        printStatus.className='status success';
+        printStatus.textContent=`Document "${file.name}" submitted successfully!`;
+        printQueue.push(file.name);
+        updateQueue();
         printForm.reset();
-    });
-</script>
+    } else{
+        printStatus.style.display='block';
+        printStatus.className='status error';
+        printStatus.textContent='Please select a file.';
+    }
+});
 
+function updateQueue(){
+    queueList.innerHTML='';
+    if(printQueue.length===0){
+        queueList.innerHTML='<li>No documents in queue.</li>';
+    } else{
+        printQueue.forEach((doc, index)=>{
+            const li = document.createElement('li');
+            li.textContent = `${index+1}. ${doc}`;
+            queueList.appendChild(li);
+        });
+    }
+}
+
+// Logout
+logoutBtn.addEventListener('click', ()=>{
+    dashboard.classList.add('hidden');
+    loginPage.classList.remove('hidden');
+    loginForm.reset();
+    printForm.reset();
+    printQueue=[];
+    updateQueue();
+});
+</script>
 </body>
 </html>
